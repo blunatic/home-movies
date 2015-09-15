@@ -1,7 +1,6 @@
 // Get all packages needed
 var express = require('express');
 var app = express();
-var rest = require('restler');
 var request = require('request');
 
 // tell node where to look for site resources
@@ -11,7 +10,6 @@ app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 
 app.get('/', function(req, res){
-
 	res.render('pages/index');
 });
 
@@ -24,7 +22,7 @@ app.get('/search', function(req, res){
 
 	request(url, function(err, resp, body){
 		body = JSON.parse(body);
-		console.log(body.response);
+
 		// logic used to compare search results with the input from user
 		 if (err){
 		 	console.log("error");
