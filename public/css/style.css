@@ -1,0 +1,189 @@
+/* Ostrich Sans */
+
+@font-face {
+	font-family: 'Ostrich Sans';
+	src: url('../fonts/ostrich-sans-regular.eot');
+	src: local('☺'), url('../fonts/ostrich-sans-regular.woff') format('woff'), url('../fonts/ostrich-sans-regular.ttf') format('truetype'), url('../fonts/ostrich-sans-regular.svg') format('svg');
+	font-weight: 400;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Ostrich Sans';
+	src: url('../fonts/ostrich-sans-light.eot');
+	src: local('☺'), url('../fonts/ostrich-sans-light.woff') format('woff'), url('../fonts/ostrich-sans-light.ttf') format('truetype'), url('../fonts/ostrich-sans-light.svg') format('svg');
+	font-weight: 300;
+	font-style: normal;
+}
+
+/* Ostrich Sans Rounded */
+
+@font-face {
+	font-family: 'Ostrich Sans Rounded';
+	src: url('../fonts/ostrich-sans-rounded.eot');
+	src: local('☺'), url('../fonts/ostrich-sans-rounded.woff') format('woff'), url('../fonts/ostrich-sans-rounded.ttf') format('truetype'), url('../fontsostrich-sans-rounded.svg') format('svg');
+	font-weight: 500;
+	font-style: normal;
+}
+
+
+body {
+	padding-top:50px;
+	background: #2C3E50;
+	color: white;
+	font-family: "Avenir";
+}
+
+footer {
+	padding:50px;
+}
+
+main {
+	padding-top: 3%;
+}
+
+.mainHeading{
+	text-align: center;
+	font-size: 7em;
+	font-family: "Ostrich Sans";
+	font-weight: 400;
+	text-transform: uppercase;
+	color: #FFF;
+}
+
+.mainHeading span{
+	font-family: "Ostrich Sans";
+	font-weight: 300;
+}
+.subHeading{
+	text-align: center;
+	padding-bottom: 5%;
+	font-size: 1.5em;
+	font-family: "Futura";
+	text-transform: uppercase;
+	color: #FFF;
+}
+
+.search{
+	position: relative;
+    font-size: 24px;
+    display: block;
+    font-family: "Avenir";
+}
+
+.search label{
+	position: absolute;
+	right: 10px;
+	top: 2px;
+	cursor: pointer;
+}
+
+
+.search img{
+	position: absolute;
+	right: 10px;
+	top: 10px;
+}
+
+.hidden{
+	display: none;
+}
+
+#noResults{
+	font-size: 2em;
+	padding-top: 10px;
+	text-align: center;
+}
+
+label{
+	display: inline-block;
+	max-width: 100%;
+	margin-bottom: 5px;
+	font-weight: bold;
+	color: #FFF;
+}
+
+.form-control{
+	display: block;
+	margin:0 auto;
+	width: 100%;
+	font-size: 18px;
+	padding: 10px;
+	color: #FFF;
+	background: #2C3E50;
+  	border: none;
+  	border-bottom: solid 2px #c9c9c9;
+  	transition: border 0.3s;
+}
+
+.form-control:focus,
+.form-control.focus{
+	border-bottom: solid 2px #969696;
+}
+
+#tvOff{
+	position: absolute;
+	left: 5.5%;
+	top: 25.5%;
+	width: 70%;
+	height: 80%;
+}
+
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 5%;
+	height: 0;
+}
+
+.videoWrapper iframe {
+		position: absolute;
+		left: 6%;
+		top: 26%;
+		width: 69%;
+		height: 80%;
+}
+
+.tv-svg{
+	position: absolute;
+	top: 0px;
+	left:0px;
+	pointer-events: none;
+}
+
+#hiddenButton1{
+	position: absolute;
+	right: 5%;
+	top: 32%;
+	border-radius: 50px;
+	padding: 5%;
+	background: transparent;
+}
+
+#hiddenButton2{
+    position: absolute;
+    right: 7.2%;
+    top: 57%;
+    border-radius: 50px;
+    padding: 3%;
+    background: transparent;
+}
+
+#video{
+	padding-top: 5%;
+	padding-bottom: 25%;
+}
+
+#videoSubtext{
+	text-align: center;
+	color: #FFF;
+}
+
+#videoDetails{
+	color: #BBBBBB;
+}
+
+@media(max-width: 1200px) {
+  .searchHeading{
+    font-size: 3.5em;
+  }
+}

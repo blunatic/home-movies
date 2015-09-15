@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<% include ../partials/head %>
+	</head>
+	<body class="container">
+		<main>
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
+				<h1 class="mainHeading">Home <span>Movies</span></h1>
+				<h2 class="subHeading">Relive the past, one video at a time.</h2>
+				<div class="search">
+					<img id="loading" class="hidden" src="../images/ajax-loader.gif"/>
+					<label id="searchIcon">
+						<span class="fa fa-search"></span>
+					</label>
+					<input id="searchBox" class="form-control" type="text" placeholder="Search...">
+					</input>
+					<p id="noResults" class="hidden"> No results found! Please try another search.</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 col-md-offset-0 col-xs-10 col-xs-offset-1">
+				<div id="video">
+					<div class="videoWrapper">
+						<img id="tvOff" src="../images/tv-off.png">
+						<iframe id="videoFrame" src="" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true"allowfullscreen></iframe>
+						<button id="hiddenButton1" type="button" class="btn"></button>
+						<button id="hiddenButton2" type="button" class="btn"></button>
+						<img class="tv-svg inject-me" src="../images/home-movies-tv.svg">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div id="videoSubtext">
+					<h2 id="videoTitle"></h2>
+					<h4 id="videoDetails"></h4>
+					<h4 id="videoCollection"></h4>
+					<p id="videoDescription"></p>
+				</div>
+			</div>
+		</div>
+		</main>
+		<footer>
+			<% include ../partials/footer %>
+		</footer>
+	</body>
+</html>
