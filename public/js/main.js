@@ -17,7 +17,7 @@ $(document).ready(function() {
 
     // onclick handler
     $('#searchIcon').click(function() {
-        if ($('#searchBox').val() == '') {
+        if ($('#searchBox').val() === '') {
             alert('Search cannot be blank!');
         } else {
             currentVideo = 0;
@@ -27,7 +27,6 @@ $(document).ready(function() {
             };
 
             $.get('/search', parameters, function(data) {
-                console.log(data);
                 if (data === 'undefined') {
                     $('#noResults').removeClass('hidden');
                 } else {
@@ -37,6 +36,7 @@ $(document).ready(function() {
                     $('#videoTitle').html(data.docs[0].title);
                     $('#videoDetails').html(data.docs[0].date + ' | Number of Downloads: ' + data.docs[0].downloads);
                     $('#videoDescription').html(data.docs[0].description);
+                    $('#videoCollection').html(data.docs[currentVideo].collection[0] + " Collection");
                 }
             });
         }
@@ -63,7 +63,6 @@ $(document).ready(function() {
         $('#videoTitle').html(result.docs[currentVideo].title);
         $('#videoDetails').html(result.docs[currentVideo].date + ' | Number of Downloads: ' + result.docs[currentVideo].downloads);
         $('#videoDescription').html(result.docs[currentVideo].description);
-        $('#videoCollection').html(results.docs[currentVideo].collection[0]);
     });
 
     $("#hiddenButton2").on('click', function(e) {
