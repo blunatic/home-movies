@@ -14,14 +14,14 @@ $(document).ready(function() {
     var currentVideo = 0;
     var angle1 = 0;
     var angle2 = 0;
-
+    var audio = new Audio('../audio/knob.mp3');
     // onclick handler
     $('#searchIcon').click(function() {
         if ($('#searchBox').val() === '') {
             alert('Search cannot be blank!');
         } else {
             currentVideo = 0;
-            $('#tvOff').css('display: none');
+            $('.tvOff').css('display: none');
             var parameters = {
                 search: $('#searchBox').val()
             };
@@ -56,6 +56,12 @@ $(document).ready(function() {
             rotation: angle1,
             transformOrigin: "50% 50%"
         });
+        audio.play();
+
+        var channelChange = $('#videoFrame').addClass('active');        
+        setTimeout(function() {
+        channelChange.removeClass('active');
+        }, 1000);
 
         currentVideo = currentVideo + 1;
         var videoURL = "https://archive.org/embed/" + result.docs[currentVideo].identifier;
