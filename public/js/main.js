@@ -52,6 +52,30 @@ $(document).ready(function() {
     });
 
     $('#hiddenButton1').click(function() {
+        // wiggle animation for antenna on load
+        var $leftAntenna = $('#LeftAntenna');
+        var $rightAntenna = $('#RightAntenna');
+
+        var t1 = new TimelineLite();
+
+        // GSAP library to rotate knob
+        t1.to($leftAntenna, '.25', {
+            rotation: 3,
+            transformOrigin: "bottom"
+        });
+        t1.to($leftAntenna, '.25', {
+            rotation: -3,
+            transformOrigin: "bottom"
+        });
+        t1.to($rightAntenna, '.25', {
+            rotation: 3,
+            transformOrigin: "bottom"
+        });
+        t1.to($rightAntenna, '.25', {
+            rotation: -3,
+            transformOrigin: "bottom"
+        });
+
         angle1 += 45;
         var $upperKnob = $('#UpperKnob');
         // GSAP library to rotate knob
@@ -72,6 +96,7 @@ $(document).ready(function() {
     });
 
     $("#hiddenButton2").on('click', function(e) {
+
         angle2 += 45;
         var $lowerKnob = $('#LowerKnob');
         // GSAP library to rotate knob
@@ -88,7 +113,7 @@ $(document).ready(function() {
         $('#videoFrame').attr('src', videoURL);
         var temp = result.docs[currentVideo].title;
         // set title
-        var title = temp.replace(/[\[\]']+/g,'');
+        var title = temp.replace(/[\[\]']+/g, '');
         $('#videoTitle').html(" " + title + " ");
         // set date and year
         var date = new Date(result.docs[currentVideo].date);
