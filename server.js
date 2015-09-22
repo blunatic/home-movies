@@ -24,7 +24,7 @@ app.get('/search', function(req, res) {
     var val = encodeURIComponent(req.query.search);
     var url = "https://archive.org/advancedsearch.php?q=" + val +
         "+AND+mediatype:movies+AND+collection:(home_movies+OR+prelingerhomemovies)" +
-        "&fl[]=identifier,title,mediatype,collection,downloads,description,date,avg_rating&rows=15&output=json";
+        "&fl[]=identifier,title,mediatype,collection,downloads,description,date,avg_rating,year&rows=15&output=json";
 
     // check if search query already exists
     redis.exists(val, function(err, reply) {

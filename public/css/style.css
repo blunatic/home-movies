@@ -1,7 +1,3 @@
-$ease-out-quint:cubic-bezier(0.230, 1.000, 0.320, 1.000);
-$ease-in-quint:cubic-bezier(0.755, 0.050, 0.855, 0.060);
-$screen-background:#121010;
-
 /* Ostrich Sans */
 
 @font-face {
@@ -19,23 +15,13 @@ $screen-background:#121010;
 	font-style: normal;
 }
 
-/* Ostrich Sans Rounded */
-
-@font-face {
-	font-family: 'Ostrich Sans Rounded';
-	src: url('../fonts/ostrich-sans-rounded.eot');
-	src: local('☺'), url('../fonts/ostrich-sans-rounded.woff') format('woff'), url('../fonts/ostrich-sans-rounded.ttf') format('truetype'), url('../fontsostrich-sans-rounded.svg') format('svg');
-	font-weight: 500;
-	font-style: normal;
-}
-
 header{
 	color: #343434;
 	float: right;
 }
 
 body {
-	padding-top:50px;
+	padding-top: 4%;
 	background: #2C3E50;
 	color: white;
 	font-family: "Avenir";
@@ -49,7 +35,11 @@ footer {
 	padding:50px;
 }
 
-.btn-circle {
+a{
+	color: #C45852;
+}
+
+#info-button {
   width: 40px;
   height: 40px;
   text-align: center;
@@ -61,13 +51,35 @@ footer {
   background-color: #2C3E50;
 }
 
-.btn-default:hover{
+#info-button:hover{
 	background-color: #2C3E50;
 	border-color: grey;
 }
 
+#info-button:focus{
+	outline: none;
+}
+
+#myModal .modal-header{
+	border: none;
+}
+
+
+#myModal .modal-body{
+	padding: 15px;
+}
+
+#myModal .modal-title{
+	text-align: center;
+	font-family: "Futura";
+}
+
+#myModal .modal-subtitle{
+	font-family: "Futura";
+}
+
 .modal-content{
-	background-color: #C45852;
+	background-color: #343434;
 	color: #FFF;
 	border-radius: 5px;
 }
@@ -76,15 +88,11 @@ footer {
 	text-align: center;
 	font-size: 7em;
 	font-family: "Ostrich Sans";
-	font-weight: 400;
+	font-weight: 300;
 	text-transform: uppercase;
 	color: #FFF;
 }
 
-.mainHeading span{
-	font-family: "Ostrich Sans";
-	font-weight: 300;
-}
 .subHeading{
 	text-align: center;
 	padding-bottom: 5%;
@@ -297,6 +305,10 @@ label{
   }
 }
 
+$ease-out-quint:cubic-bezier(0.230, 1.000, 0.320, 1.000);
+$ease-in-quint:cubic-bezier(0.755, 0.050, 0.855, 0.060);
+$screen-background:#121010;
+
 @keyframes turn-on{
   0%{
     animation-timing-function:$ease-in-quint;
@@ -347,7 +359,23 @@ label{
 
 #video{
 	padding-top: 5%;
-	padding-bottom: 25%;
+	padding-bottom: 20%;
+}
+
+#videoTitle{
+	font-family: "Avenir";
+}
+
+#videoTitle:before{
+  content: '\f10d';
+  font-family: "FontAwesome";
+  font-size: 80%;
+}
+
+#videoTitle:after{
+  content: '\f10e';
+  font-family: "FontAwesome";
+  font-size: 80%;
 }
 
 #videoSubtext{

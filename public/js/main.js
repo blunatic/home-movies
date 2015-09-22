@@ -10,11 +10,15 @@ $(document).ready(function() {
         $('#searchIcon').show();
     });
 
+    $('#videoTitle').hide();
+
     var result = null;
     var currentVideo = 0;
     var angle1 = 0;
     var angle2 = 0;
     var audio = new Audio('../audio/knob.mp3');
+    var audio2 = new Audio('../audio/knob2.mp3');
+
     // onclick handler
     $('#searchIcon').click(function() {
         if ($('#searchBox').val() === '') {
@@ -22,6 +26,8 @@ $(document).ready(function() {
         } else {
             currentVideo = 0;
             $('.tvOff').css('display: none');
+            $('#videoTitle').show();
+
             var parameters = {
                 search: $('#searchBox').val()
             };
@@ -30,13 +36,9 @@ $(document).ready(function() {
                 if (data === 'undefined') {
                     $('#noResults').removeClass('hidden');
                 } else {
+                    console.log(data);
                     result = data;
-                    var videoURL = "https://archive.org/embed/" + data.docs[currentVideo].identifier;
-                    $('#videoFrame').attr('src', videoURL);
-                    $('#videoTitle').html(data.docs[0].title);
-                    $('#videoDetails').html(data.docs[0].date + ' | Number of Downloads: ' + data.docs[0].downloads);
-                    $('#videoDescription').html(data.docs[0].description);
-                    $('#videoCollection').html(data.docs[currentVideo].collection[0] + " Collection");
+                    updateVideo(currentVideo);
                 }
             });
         }
@@ -52,33 +54,52 @@ $(document).ready(function() {
     $('#hiddenButton1').click(function() {
         angle1 += 45;
         var $upperKnob = $('#UpperKnob');
-        TweenMax.to($upperKnob, .25, {
+        // GSAP library to rotate knob
+        TweenMax.to($upperKnob, '.25', {
             rotation: angle1,
             transformOrigin: "50% 50%"
         });
         audio.play();
 
-        var channelChange = $('#videoFrame').addClass('active');        
+        // play channelChange animation each time click is registered
+        var channelChange = $('#videoFrame').addClass('active');
         setTimeout(function() {
-        channelChange.removeClass('active');
+            channelChange.removeClass('active');
         }, 1000);
 
-        currentVideo = currentVideo + 1;
-        var videoURL = "https://archive.org/embed/" + result.docs[currentVideo].identifier;
-        $('#videoFrame').attr('src', videoURL);
-        $('#videoTitle').html(result.docs[currentVideo].title);
-        $('#videoDetails').html(result.docs[currentVideo].date + ' | Number of Downloads: ' + result.docs[currentVideo].downloads);
-        $('#videoDescription').html(result.docs[currentVideo].description);
+        currentVideo++;
+        updateVideo(currentVideo);
     });
 
     $("#hiddenButton2").on('click', function(e) {
         angle2 += 45;
         var $lowerKnob = $('#LowerKnob');
-        TweenMax.to($lowerKnob, .25, {
+        // GSAP library to rotate knob
+        TweenMax.to($lowerKnob, '.25', {
             rotation: angle2,
             transformOrigin: "50% 50%"
         });
-
+        audio2.play();
     });
+
+    function updateVideo(currentVideo) {
+        // set video url
+        var videoURL = "https://archive.org/embed/" + result.docs[currentVideo].identifier;
+        $('#videoFrame').attr('src', videoURL);
+        var temp = result.docs[currentVideo].title;
+        // set title
+        var title = temp.replace(/[\[\]']+/g,'');
+        $('#videoTitle').html(" " + title + " ");
+        // set date and year
+        var date = new Date(result.docs[currentVideo].date);
+        var year = date.getUTCFullYear();
+        if (isNaN(year)) {
+            year = 'Not Available';
+        }
+        // set video details
+        $('#videoDetails').html(year + ' | Number of Downloads: ' + result.docs[currentVideo].downloads);
+        $('#videoDescription').html(result.docs[currentVideo].description);
+        $('#videoCollection').html(result.docs[currentVideo].collection[currentVideo] + " Collection");
+    }
 
 });
