@@ -12,12 +12,15 @@ $(document).ready(function() {
 
     $('#videoTitle').hide();
 
-    var result = null;
+    var videoResults = null;
+    var songResults = null;
     var currentVideo = 0;
     var angle1 = 0;
     var angle2 = 0;
     var audio = new Audio('../audio/knob.mp3');
     var audio2 = new Audio('../audio/knob2.mp3');
+
+    var randomSong = 0;
 
     // onclick handler
     $('#searchIcon').click(function() {
@@ -37,7 +40,7 @@ $(document).ready(function() {
                     $('#noResults').removeClass('hidden');
                 } else {
                     console.log(data);
-                    result = data;
+                    videoResults = data;
                     updateVideo(currentVideo);
                 }
             });
@@ -105,26 +108,54 @@ $(document).ready(function() {
             transformOrigin: "50% 50%"
         });
         audio2.play();
+
+        $.get('/music', function(data) {
+            console.log(data);
+            songResults = data;
+            randomSong = Math.floor(Math.random() * 100) + 1;
+            updateMusic(randomSong);
+        });
     });
 
     function updateVideo(currentVideo) {
         // set video url
-        var videoURL = "https://archive.org/embed/" + result.docs[currentVideo].identifier;
+        var videoURL = "https://archive.org/embed/" + videoResults.docs[currentVideo].identifier;
         $('#videoFrame').attr('src', videoURL);
-        var temp = result.docs[currentVideo].title;
+        var temp = videoResults.docs[currentVideo].title;
         // set title
         var title = temp.replace(/[\[\]']+/g, '');
         $('#videoTitle').html(" " + title + " ");
         // set date and year
-        var date = new Date(result.docs[currentVideo].date);
+        var date = new Date(videoResults.docs[currentVideo].date);
         var year = date.getUTCFullYear();
         if (isNaN(year)) {
             year = 'Not Available';
         }
         // set video details
-        $('#videoDetails').html(year + ' | Number of Downloads: ' + result.docs[currentVideo].downloads);
-        $('#videoDescription').html(result.docs[currentVideo].description);
-        $('#videoCollection').html(result.docs[currentVideo].collection[currentVideo] + " Collection");
+        $('#videoDetails').html(year + ' | Number of Downloads: ' + videoResults.docs[currentVideo].downloads);
+        $('#videoDescription').html(videoResults.docs[currentVideo].description);
+        $('#videoCollection').html(videoResults.docs[currentVideo].collection[currentVideo] + " Collection");
     }
 
+    function updateMusic(randomSong) {
+        var songDetails = songResults.dataset[randomSong];
+        var trackID = songResults.dataset[randomSong].track_id;
+        var parameters = {
+            search: trackID
+        };
+
+        $.get('/song', parameters, function(data) {
+            if (data === 'undefined') {
+                console.log("no results");
+            } else {
+                console.log("ajax got data from backend" + data);
+                var songLink = data.track_listen_url;
+                console.log(songLink);
+                var audio = document.getElementById('audio');
+                $('#fma-song').attr('src', songLink);
+                audio.load();
+                audio.play();
+            }
+        });
+    }
 });

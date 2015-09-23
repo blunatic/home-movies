@@ -64,6 +64,19 @@ a{
 	border: none;
 }
 
+#myModal .close{
+	color: grey;
+}
+
+#myModal .modal-title{
+	text-align: center;
+	font-family: "Futura";
+}
+
+#myModal .modal-subtitle{
+	font-family: "Futura";
+}
+
 
 #myModal .modal-body{
 	padding: 15px;
@@ -162,7 +175,7 @@ label{
 .tvOff{
 	position: absolute;
 	left: 5.5%;
-	top: 28%;
+	top: 27%;
 	width: 70%;
 	height: 80%;
 	animation:turn-on 1s linear;

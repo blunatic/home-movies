@@ -12,6 +12,7 @@
     "body-parser": "^1.13.3",
     "ejs": "^2.3.3",
     "express": "^4.13.3",
+    "free-music-archive": "^1.0.0",
     "redis": "^1.0.0",
     "request": "^2.61.0",
     "restler": "^3.3.0",

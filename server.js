@@ -2,6 +2,7 @@
 var express = require('express');
 var app = express();
 var request = require('request');
+var fma = require('free-music-archive');
 
 // handle redis for deployment (heroku) vs. dev
 if (process.env.REDISTOGO_URL) {
@@ -35,8 +36,8 @@ app.get('/search', function(req, res) {
                 if (error !== null) {
                     // handle error
                 } else {
-                	// send result as JSON
-                	result = JSON.parse(result);
+                    // send result as JSON
+                    result = JSON.parse(result);
                     res.send(result.response);
                 }
             });
@@ -62,6 +63,37 @@ app.get('/search', function(req, res) {
         }
     });
 
+});
+
+app.get('/music', function(req, res) {
+    var val = encodeURIComponent(req.query.search);
+    fma.tracks({
+        genre_handle: 'Ambient',
+        limit: 100
+    }, function(err, results) {
+        if (err) {
+            console.error(err);
+        }
+        console.log(JSON.stringify(results, null, 2));
+        console.log(results.total);
+        res.send(results);
+    })
+});
+
+app.get('/song', function(req, res) {
+    var val = encodeURIComponent(req.query.search);
+    var url = 'http://freemusicarchive.org/services/track/single/' + val + '.json?api_key=BAB8WGEA2X7LQNJ6';
+    console.log(url);
+    request(url, function(err, resp, body) {
+        console.log("song result is: " + body);
+        // logic used to compare search results with the input from user
+        if (err) {
+            console.log("error");
+        } else {
+            // pass back the results to client side
+            res.send(JSON.parse(body));
+        }
+    });
 });
 
 // start server
