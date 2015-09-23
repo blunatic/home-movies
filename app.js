@@ -1,8 +1,10 @@
 // Get all packages needed
 var express = require('express');
+var router = express.Router();
 var app = express();
 var request = require('request');
 var fma = require('free-music-archive');
+var port = process.env.PORT || 8080;
 
 // handle redis for deployment (heroku) vs. dev
 if (process.env.REDISTOGO_URL) {
@@ -12,8 +14,8 @@ if (process.env.REDISTOGO_URL) {
 }
 
 // redis error handling
-redis.on('error', function (err) {
-  console.log('Error ' + err);
+redis.on('error', function(err) {
+    console.log('Error ' + err);
 });
 
 // tell node where to look for site resources
@@ -22,11 +24,18 @@ app.use(express.static('public'));
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 
-app.get('/', function(req, res) {
+// log all requests to console
+router.use(function(req, res, next) {
+    console.log(req.method, req.url);
+    next();
+});
+
+
+router.get('/', function(req, res) {
     res.render('pages/index');
 });
 
-app.get('/search', function(req, res) {
+router.get('/search', function(req, res) {
     var val = encodeURIComponent(req.query.search);
     var url = "https://archive.org/advancedsearch.php?q=" + val +
         "+AND+mediatype:movies+AND+collection:(home_movies+OR+prelingerhomemovies)" +
@@ -54,7 +63,7 @@ app.get('/search', function(req, res) {
                 // logic used to compare search results with the input from user
                 if (err) {
                     console.log("error");
-                } else if (body.response.numFound == 0) {
+                } else if (body.response.numFound === 0) {
                     // no results found
                     res.send('undefined');
                 } else {
@@ -70,7 +79,7 @@ app.get('/search', function(req, res) {
 
 });
 
-app.get('/music', function(req, res) {
+router.get('/music', function(req, res) {
     var val = encodeURIComponent(req.query.search);
     fma.tracks({
         genre_handle: 'Ambient',
@@ -82,10 +91,10 @@ app.get('/music', function(req, res) {
         console.log(JSON.stringify(results, null, 2));
         console.log(results.total);
         res.send(results);
-    })
+    });
 });
 
-app.get('/song', function(req, res) {
+router.get('/song', function(req, res) {
     var val = encodeURIComponent(req.query.search);
     var url = 'http://freemusicarchive.org/services/track/single/' + val + '.json?api_key=BAB8WGEA2X7LQNJ6';
     console.log(url);
@@ -102,10 +111,12 @@ app.get('/song', function(req, res) {
 });
 
 // 404 handling
-app.use(function(req, res, next) {
-  res.status(404).send('Sorry cant find that!');
+router.use(function(req, res, next) {
+    res.status(404).send('Sorry cant find that!');
 });
 
+app.use('/', router);
+
 // start server
-app.listen(8080);
+app.listen(port);
 console.log("Server started!");
