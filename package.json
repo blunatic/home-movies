@@ -2,8 +2,9 @@
   "name": "home-movies",
   "version": "1.0.0",
   "description": "An app for viewing random home movies from the Internet Archive's Home Videos collection.",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
+    "start": "node app.js"
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -15,7 +16,6 @@
     "free-music-archive": "^1.0.0",
     "redis": "^1.0.0",
     "request": "^2.61.0",
-    "restler": "^3.3.0",
     "svg-injector": "^1.1.3"
   }
 }

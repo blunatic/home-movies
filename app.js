@@ -11,8 +11,13 @@ if (process.env.REDISTOGO_URL) {
     var redis = require("redis").createClient();
 }
 
+// redis error handling
+redis.on('error', function (err) {
+  console.log('Error ' + err);
+});
+
 // tell node where to look for site resources
-app.use(express.static(__dirname + '/public'));
+app.use(express.static('public'));
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
@@ -94,6 +99,11 @@ app.get('/song', function(req, res) {
             res.send(JSON.parse(body));
         }
     });
+});
+
+// 404 handling
+app.use(function(req, res, next) {
+  res.status(404).send('Sorry cant find that!');
 });
 
 // start server
