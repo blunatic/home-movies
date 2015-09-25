@@ -19,7 +19,7 @@ redis.on('error', function(err) {
 });
 
 // tell node where to look for site resources
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
