@@ -1,6 +1,6 @@
 <!-- views/pages/index.ejs -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="homeMovies">
 	<head>
 		<% include ../partials/head %>
 	</head>
@@ -9,45 +9,47 @@
 			<% include ../partials/header %>
 		</header>
 		<main>
-		<div class="row">
-			<div class="col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
-				<h1 class="mainHeading">Home Movies</h1>
-				<h2 class="subHeading">Relive the past, one video at a time.</h2>
-				<div class="search">
-					<img id="loading" class="hidden" src="../images/ajax-loader.gif"/>
-					<label id="searchIcon">
-						<span class="fa fa-search"></span>
-					</label>
-					<input id="searchBox" class="form-control" type="text" placeholder="Search...">
-					</input>
-					<p id="noResults" class="hidden"> No results found! Please try another search.</p>
+		<div class="movie" ng-controller="MovieController">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
+					<h1 class="mainHeading">Home Movies</h1>
+					<h2 class="subHeading">Relive the past, one video at a time.</h2>
+					<div class="search">
+						<img id="loading" ng-show="loading" src="../images/ajax-loader.gif"/>
+						<label id="searchIcon" ng-show="!loading">
+							<span class="fa fa-search"></span>
+						</label>
+						<input type="text" ng-model="search" ng-change="change()" id="searchBox" class="form-control" placeholder="Search...">
+						</input>
+						<p id="noResults" ng-show="noResults"> No results found! Please try another search.</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div id="video" class="col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1">
+					<div class="videoWrapper">
+						<img class="tvOff">
+						<iframe id="videoFrame" ng-src="{{movieUrl}}" src="" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true"allowfullscreen></iframe>
+						<button id="hiddenButton1" ng-click="nextMovie()" type="button" class="btn"></button>
+						<button id="hiddenButton2" type="button" class="btn"></button>
+						<img class="tv-svg inject-me" src="../images/home-movies-tv.svg">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div id="videoSubtext">
+						<h2 id="videoTitle" ng-bind="videoTitle" ng-show="videoTitle != null"></h2>
+						<h4 id="videoDetails" ng-bind="videoDetails"></h4>
+						<h4 id="videoCollection" ng-bind="videoCollection"></h4>
+						<p id="videoDescription" ng-bind="videoDescription"></p>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div id="video" class="col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1">
-				<div class="videoWrapper">
-					<img class="tvOff">
-					<iframe id="videoFrame" src="" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true"allowfullscreen></iframe>
-					<button id="hiddenButton1" type="button" class="btn"></button>
-					<button id="hiddenButton2" type="button" class="btn"></button>
-					<img class="tv-svg inject-me" src="../images/home-movies-tv.svg">
-				</div>
-			</div>
+		<div ng-model="details">
+			{{details}}
 		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div id="videoSubtext">
-					<h2 id="videoTitle"></h2>
-					<h4 id="videoDetails"></h4>
-					<h4 id="videoCollection"></h4>
-					<p id="videoDescription"></p>
-				</div>
-			</div>
-		</div>
-		<audio id="audio" controls>
-			<source id="fma-song" src="" type="audio/mp3"></source>
-		</audio>
 		</main>
 		<footer>
 			<% include ../partials/footer %>
