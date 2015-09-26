@@ -94,7 +94,7 @@ router.get('/search/:movie', function(req, res) {
 router.get('/music', function(req, res) {
     var val = encodeURIComponent(req.query.search);
     fma.tracks({
-        genre_handle: 'Ambient',
+        genre_handle: 'Americana',
         limit: 100
     }, function(err, results) {
         if (err) {

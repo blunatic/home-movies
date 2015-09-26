@@ -240,6 +240,52 @@ label{
     background: transparent;
 }
 
+#hiddenPlay{
+    position: absolute;
+    right: 13.7%;
+    top: 76.3%;
+    border-radius: 50px;
+    padding: 1%;
+    background: transparent;
+}
+
+#hiddenPause{
+    position: absolute;
+    right: 10.8%;
+    top: 76.3%;
+    border-radius: 50px;
+    padding: 1%;
+    background: transparent;
+}
+
+#hiddenVolumeDown{
+    position: absolute;
+    right: 8.1%;
+    top: 76.3%;
+    border-radius: 50px;
+    padding: 1%;
+    background: transparent;
+}
+
+#hiddenVolumeUp{
+    position: absolute;
+    right: 5.2%;
+    top: 76.3%;
+    border-radius: 50px;
+    padding: 1%;
+    background: transparent;
+}
+
+
+
+
+.hiddenAudio button{
+    display: inline-block;
+    border-radius: 50px;
+    padding: 10%;
+    z-index: 5000;
+}
+
 @keyframes change-channel{
   0%{
     transform:scale(1,1) translate3d(0,0,0);

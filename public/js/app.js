@@ -18,7 +18,7 @@ app.factory('mainService', function($http) {
 app.controller('MovieController', function($scope, $http, $sce, mainService) {
     var pendingSearch;
     var currentMovie;
-    $scope.currentResponse =[];
+    $scope.currentResponse = [];
 
     if ($scope.search !== undefined) {
         fetch();
@@ -46,40 +46,48 @@ app.controller('MovieController', function($scope, $http, $sce, mainService) {
     };
 
     function fetch() {
-    	$scope.loading = true;
-    	$scope.noResults = false;
-    	mainService.getMovies($scope.search).then(function(response){
-    		console.log(response);
-    		if(response.numFound !== 0){
-	    		$scope.currentResponse = response;
-	    		currentMovie = 0;
-	    		update();
-    		} else{
-    			// no results found, display this to user
-    			$scope.noResults = true;
-    			$scope.loading = false;
-    		}
-    	});
+        $scope.loading = true;
+        $scope.noResults = false;
+        mainService.getMovies($scope.search).then(function(response) {
+            console.log(response);
+            if (response.numFound !== 0) {
+                $scope.currentResponse = response;
+                currentMovie = 0;
+                update();
+            } else {
+                // no results found, display this to user
+                $scope.noResults = true;
+                $scope.loading = false;
+            }
+        });
     }
 
     // display results and/or update results if button is clicked
     function update() {
-    	$scope.loading = false;
-    	$scope.movie = "https://archive.org/embed/" + $scope.currentResponse.docs[currentMovie].identifier;
-    	$scope.movieUrl = $sce.trustAsResourceUrl($scope.movie);
-    	var temp = $scope.currentResponse.docs[currentMovie].title;
-    	var title = temp.replace(/[\[\]']+/g, '');
+        // display loading spinner
+        $scope.loading = false;
+
+        // set video url source
+        $scope.movie = "https://archive.org/embed/" + $scope.currentResponse.docs[currentMovie].identifier;
+        $scope.movieUrl = $sce.trustAsResourceUrl($scope.movie);
+
+        // set video title, clearing out any brackets in title
+        var temp = $scope.currentResponse.docs[currentMovie].title;
+        var title = temp.replace(/[\[\]']+/g, '');
         $scope.videoTitle = " " + title + " ";
+
+        // set video date
         var date = new Date($scope.currentResponse.docs[currentMovie].date);
         var year = date.getUTCFullYear();
         if (isNaN(year)) {
-            year = 'Not Available';
+            year = 'Year not available';
         }
-        $scope.videoDetails = year + " | Downloads: " + $scope.currentResponse.docs[currentMovie].downloads;
+        // set video details (note: Internet Archive uses "downloads" field for number of views)
+        $scope.videoDetails = year + " | Result: " + (currentMovie + 1) + " of " +
+            +$scope.currentResponse.numFound + " | Views: " + $scope.currentResponse.docs[currentMovie].downloads;
         $scope.videoCollection = $scope.currentResponse.docs[currentMovie].collection[0] + " Collection";
         $scope.videoDescription = $scope.currentResponse.docs[currentMovie].description;
     }
 
 
 });
-

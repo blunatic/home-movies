@@ -32,7 +32,13 @@
 						<iframe id="videoFrame" ng-src="{{movieUrl}}" src="" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true"allowfullscreen></iframe>
 						<button id="hiddenButton1" ng-click="nextMovie()" type="button" class="btn"></button>
 						<button id="hiddenButton2" type="button" class="btn"></button>
-						<img class="tv-svg inject-me" src="../images/home-movies-tv.svg">
+						<div class="hiddenAudio">
+							<button id="hiddenPlay" type="button" class="btn"></button>
+							<button id="hiddenPause" type="button" class="btn"></button>
+							<button id="hiddenVolumeDown" type="button" class="btn"></button>
+							<button id="hiddenVolumeUp" type="button" class="btn"></button>
+						</div>
+						<img class="tv-svg inject-me" src="../images/home-movies-tv 2.svg">
 					</div>
 				</div>
 			</div>
@@ -47,8 +53,12 @@
 				</div>
 			</div>
 		</div>
-		<div ng-model="details">
-			{{details}}
+		<div class="row">
+			<div class="col-md-12">
+				<audio id="audio" controls>
+					<source id="fma-song" src="" type="audio/mp3">
+				</audio>
+			</div>
 		</div>
 		</main>
 		<footer>
