@@ -2,7 +2,6 @@
 JS for Animations and Audio
 */
 $(document).ready(function() {
-    var songResults = null;
     var angle1 = 0;
     var angle2 = 0;
     var audio = new Audio('../audio/knob.mp3');
@@ -57,7 +56,6 @@ $(document).ready(function() {
 
     // animation and sound for bottom TV knob button
     $("#hiddenButton2").click(function() {
-
         angle2 += 45;
         var $lowerKnob = $('#LowerKnob');
         // GSAP library to rotate knob
@@ -67,12 +65,23 @@ $(document).ready(function() {
         });
         audio2.play();
 
-        $.get('/music', function(data) {
-            console.log(data);
-            songResults = data;
-            randomSong = Math.floor(Math.random() * 100) + 1;
-            updateMusic(randomSong);
+        var $speaker = $('#Speaker');
+
+        TweenMax.to($speaker, .1, {
+            repeat: 2,
+            scaleX: 1.1,
+            scaleY: 1.1,
+            yoyo: true,
+            delay: .1,
+            ease: Quad.easeInOut
         });
+        TweenMax.to($speaker, .1, {
+            x: 0,
+            scaleX: 1,
+            scaleY: 1,
+            delay: .1 * 4
+        });
+
     });
 
     // audio hidden button controls
@@ -80,9 +89,25 @@ $(document).ready(function() {
         var $playButton = $('#PlayButton');
         audioButtonClick($playButton);
         musicPlayer.play();
+        console.log("Current time is: " + Math.floor(musicPlayer.currentTime));
+    });
+    $("#hiddenPause").click(function() {
+        var $pauseButton = $('#PauseButton');
+        audioButtonClick($pauseButton);
+        musicPlayer.pause();
+    });
+    $("#hiddenVolumeDown").click(function() {
+        var $volumeDown = $('#VolumeDown');
+        audioButtonClick($volumeDown);
+        musicPlayer.volume -= 0.1;
+    });
+    $("#hiddenVolumeUp").click(function() {
+        var $volumeUp = $('#VolumeUp');
+        audioButtonClick($volumeUp);
+        musicPlayer.volume += 0.1;
     });
 
-    function audioButtonClick(button){
+    function audioButtonClick(button) {
         var t1 = new TimelineLite();
 
         t1.to(button, '.25', {
@@ -95,44 +120,7 @@ $(document).ready(function() {
             scaleY: 1,
             transformOrigin: "50% 50%"
         });
+
         audio3.play();
-    }
-
-    $("#hiddenPause").click(function() {
-        var $pauseButton = $('#PauseButton');
-        audioButtonClick($pauseButton);
-        musicPlayer.pause();
-    });
-    $("#hiddenVolumeDown").click(function() {
-        var $volumeDown = $('#VolumeDown');
-        audioButtonClick($volumeDown);
-        musicPlayer.volume -= 0.1;
-    });
-    $("#hiddenVolumeUp").click(function() {
-        var $volumeUp= $('#VolumeUp');
-        audioButtonClick($volumeUp);
-        musicPlayer.volume += 0.1;
-    });
-
-    function updateMusic(randomSong) {
-        var songDetails = songResults.dataset[randomSong];
-        var trackID = songResults.dataset[randomSong].track_id;
-        var parameters = {
-            search: trackID
-        };
-
-        $.get('/song', parameters, function(data) {
-            if (data === 'undefined') {
-                console.log("no results");
-            } else {
-                console.log("ajax got data from backend" + data);
-                var songLink = data.track_listen_url;
-                console.log(songLink);
-                var musicPlayer = document.getElementById('audio');
-                $('#fma-song').attr('src', songLink);
-                musicPlayer.load();
-                musicPlayer.play();
-            }
-        });
     }
 });
