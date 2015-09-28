@@ -4,8 +4,9 @@ var router = express.Router();
 var app = express();
 var request = require('request');
 var bodyParser = require('body-parser');
-var fma = require('free-music-archive');
 var apicache = require('apicache').options({ debug: true }).middleware;
+var Jamendo = require('jamendo');
+
 var port = process.env.PORT || 8080;
 
 // tell node where to look for site resources
@@ -22,6 +23,14 @@ router.use(function(req, res, next) {
     next();
 });
 
+var jamendo = new Jamendo({
+  client_id : '23c286b4', 
+  protocol  : 'http',
+  version   : 'v3.0',
+  format    : 'JSON',
+  debug     : false ,
+  rejectUnauthorized: false
+});
 
 router.get('/', function(req, res) {
     res.render('pages/index');
@@ -44,30 +53,12 @@ router.get('/search/:movie', apicache('5 minutes'), function(req, res) {
     });
 });
 
-router.get('/music', function(req, res) {
-    fma.tracks({
-        genre_handle: 'Ambient',
-        limit: 100
-    }, function(err, results) {
-        if (err) {
-            console.error(err);
-        }
-        console.log(results.total);
-        res.send(results);
-    });
-});
-
-router.get('/song/:track_id', function(req, res) {
-    var val = req.params.track_id;
-    console.log("track ID " + val);
-    var url = 'http://freemusicarchive.org/services/track/single/' + val + '.json?api_key=BAB8WGEA2X7LQNJ6';
-    request(url, function(err, resp, body) {
-        if(!err && resp.statusCode == 200){
-            body = JSON.parse(body);
-            res.send(body);
-        } else{
-            res.send("error is" + resp.statusCode);
-        }
+router.get('/music', function(req, res){
+    jamendo.tracks({
+        limit: '100',
+        tags: 'jazz+instrumental'
+    }, function(error, data){
+        res.send(data);
     });
 });
 

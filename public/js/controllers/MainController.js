@@ -21,10 +21,8 @@ angular.module('homeMovies').controller('MainController', function($scope, $http
 
     // get next movie on top knob/button click
     $scope.nextMovie = function() {
-        console.log("current movie is : " + currentMovie);
         currentMovie++;
         updateMovie();
-        console.log("current movie is now: " + currentMovie);
     };
 
     // allow user to select all text inside input
@@ -73,40 +71,34 @@ angular.module('homeMovies').controller('MainController', function($scope, $http
         }
         // set video details (note: Internet Archive uses "downloads" field for number of views)
         $scope.videoDetails = year + " | Result: " + (currentMovie + 1) + " of " +
-            +$scope.currentMovies.numFound + " | Views: " + $scope.currentMovies.docs[currentMovie].downloads;
+            $scope.currentMovies.numFound + " | Views: " + $scope.currentMovies.docs[currentMovie].downloads;
         $scope.videoCollection = $scope.currentMovies.docs[currentMovie].collection[0] + " Collection";
         $scope.videoDescription = $scope.currentMovies.docs[currentMovie].description;
     }
 
     // get next movie on top knob/button click
     $scope.getSong = function() {
-    	// get random song from set of current songs each time
-    	randomSong = Math.floor(Math.random() * 100) + 1;
-    	console.log("currentSongs is currently equal to: " + $scope.currentSongs);
+        // get random song from set of current songs each time
+        randomSong = Math.floor(Math.random() * 100) + 1;
         if (!$scope.currentSongs) {
-        	console.log("current songs is undefined");
-            songService.getSongs().then(function(response) {
-                if (response.total !== 0) {
-                    $scope.currentSongs = response;
-                    updateSong();
-                }
+            songService.getMusic().then(function(response) {
+                $scope.currentSongs = response;
+                updateSong();
             });
-        } else{
-        	updateSong();
+        } else {
+            updateSong();
         }
     };
 
     function updateSong() {
-    	console.log("inside updateSong : " + $scope.currentSongs);
-    	var songDetails = $scope.currentSongs.dataset[randomSong];
-    	var trackID = $scope.currentSongs.dataset[randomSong].track_id;
+        var songName = $scope.currentSongs.results[randomSong].name;
+        var trackUrl = $scope.currentSongs.results[randomSong].audio;
 
-        songService.getRandomSong(trackID).then(function(response) {
-            var musicPlayer = document.getElementById('audio');
-            $('#fma-song').attr('src', response.track_listen_url);
-            musicPlayer.load();
-            musicPlayer.play();
-        });
+        var musicPlayer = document.getElementById('audio');
+        $('#fma-song').attr('src', trackUrl);
+        musicPlayer.load();
+        musicPlayer.volume = 0.5;
+        musicPlayer.play();
     }
 
 

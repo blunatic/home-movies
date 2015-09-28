@@ -15,18 +15,9 @@ angular.module('homeMovies').factory('mainService', function($http) {
 
 angular.module('homeMovies').factory('songService', function($http) {
     return {
-        getSongs: function() {
+        getMusic: function(){
             // return promise to data
             return $http.get('/music').then(function(response) {
-                // resolve the promise as the data
-                return response.data;
-            });
-        },
-        getRandomSong: function(query) {
-            // return promise to data
-            return $http.get('/song/' + query).then(function(response) {
-                // resolve the promise as the data
-                console.log("getRandomSong" + response.data);
                 return response.data;
             });
         }
