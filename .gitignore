@@ -1,6 +1,6 @@
 # General #
 ######################
-default.json
+config/
 .env
 
 # OS generated #
