@@ -7,16 +7,14 @@ angular.module('homeMovies').controller('MainController', function($scope, $http
     $scope.currentMovies = null;
     $scope.currentSongs = null;
 
-    if ($scope.search !== undefined) {
-        fetch();
-    }
-
     // wait for user to type something, then search after user has stopped typing
     $scope.change = function() {
         if (pendingSearch) {
             clearTimeout(pendingSearch);
         }
+        if($scope.search){
         pendingSearch = setTimeout(fetch, 800);
+        }
     };
 
     // get next movie on top knob/button click
