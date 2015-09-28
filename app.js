@@ -4,6 +4,9 @@ var router = express.Router();
 var app = express();
 var request = require('request');
 var bodyParser = require('body-parser');
+var config = require('config');
+var jamendoKey = config.get('jamendo-api-key');
+
 var apicache = require('apicache').options({ debug: true }).middleware;
 var Jamendo = require('jamendo');
 
@@ -24,7 +27,7 @@ router.use(function(req, res, next) {
 });
 
 var jamendo = new Jamendo({
-  client_id : '23c286b4', 
+  client_id : jamendoKey, 
   protocol  : 'http',
   version   : 'v3.0',
   format    : 'JSON',
