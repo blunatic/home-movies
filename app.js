@@ -5,6 +5,8 @@ var app = express();
 var request = require('request');
 var bodyParser = require('body-parser');
 var config = require('config');
+console.log('NODE_CONFIG_DIR: ' + config.util.getEnv('NODE_CONFIG'));
+
 var jamendoKey = config.get('jamendo-api-key');
 
 var apicache = require('apicache').options({ debug: true }).middleware;
