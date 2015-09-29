@@ -1,4 +1,4 @@
-/* Ostrich Sans */
+/* Font addin for main title heading */
 
 @font-face {
 	font-family: 'Ostrich Sans';
@@ -24,7 +24,9 @@ body {
 	padding-top: 3%;
 	background: #2C3E50;
 	color: white;
-	font-family: "Avenir";
+	font-family: "Avenir", "Lato", "Arial";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 main {
@@ -39,26 +41,7 @@ a{
 	color: #C45852;
 }
 
-#info-button {
-  width: 40px;
-  height: 40px;
-  text-align: center;
-  padding: 5px 0;
-  font-size: 12px;
-  line-height: 1.428571429;
-  border-radius: 20px;
-  border-color: #FFF;
-  background-color: #2C3E50;
-}
-
-#info-button:hover{
-	background-color: #2C3E50;
-	border-color: #C45852
-}
-
-#info-button:focus{
-	outline: none;
-}
+/* Modal (Header) */
 
 #myModal .modal-header{
 	border: none;
@@ -97,6 +80,8 @@ a{
 	border-radius: 5px;
 }
 
+/* Main Heading and Subheading */
+
 .mainHeading{
 	text-align: center;
 	font-size: 7em;
@@ -115,6 +100,8 @@ a{
 	color: #FFF;
 }
 
+/* Search bar and button */
+
 .search{
 	position: relative;
   font-size: 24px;
@@ -129,29 +116,37 @@ a{
 	cursor: pointer;
 }
 
-
 .search img{
 	position: absolute;
 	right: 10px;
 	top: 10px;
 }
 
-.hidden{
-	display: none;
+#info-button {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  padding: 5px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 20px;
+  border-color: #FFF;
+  background-color: #2C3E50;
+}
+
+#info-button:hover{
+  background-color: #2C3E50;
+  border-color: #C45852
+}
+
+#info-button:focus{
+  outline: none;
 }
 
 #noResults{
 	font-size: 1em;
 	padding-top: 10px;
 	text-align: center;
-}
-
-label{
-	display: inline-block;
-	max-width: 100%;
-	margin-bottom: 5px;
-	font-weight: bold;
-	color: #FFF;
 }
 
 .form-control{
@@ -171,6 +166,8 @@ label{
 .form-control.focus{
 	border-bottom: solid 2px #969696;
 }
+
+/* TV Wrapper, background, SVG, and iFrame */
 
 .tvOff{
 	position: absolute;
@@ -227,6 +224,8 @@ label{
 #TrackSlider{
   pointer-events: all;
 }
+
+/* Hidden Buttons */
 
 #hiddenButton1{
 	position: absolute;
@@ -292,6 +291,40 @@ label{
 .hiddenAudio button:focus{
   outline: none;
 }
+
+/* Video and Audio Details */
+
+#video{
+  padding-top: 5%;
+  padding-bottom: 20%;
+}
+
+#videoTitle:before{
+  content: '\f10d';
+  font-family: "FontAwesome";
+  font-size: 80%;
+}
+
+#videoTitle:after{
+  content: '\f10e';
+  font-family: "FontAwesome";
+  font-size: 80%;
+}
+
+#videoSubtext{
+  text-align: center;
+  color: #FFF;
+}
+
+#videoDetails{
+  color: #BBBBBB;
+}
+
+#audio{
+  display: none;
+}
+
+/* CSS Animation timelines for change-channel effect, TV on effect, and speaker wiggle effect */
 
 @keyframes change-channel{
   0%{
@@ -423,42 +456,14 @@ $screen-background:#121010;
   }
 }
 
+@keyframes wiggle {
+  0% { transform: rotate(3deg); }
+  50% { transform: rotate(-3deg); }
+  100% { transform: rotate(3deg); }
+}
+
 @-webkit-keyframes wiggle {
 	0% { -webkit-transform: rotate(3deg); }
 	50% { -webkit-transform: rotate(-3deg); }
 	100% { -webkit-transform: rotate(3deg); }
-}
-
-#video{
-	padding-top: 5%;
-	padding-bottom: 20%;
-}
-
-#videoTitle{
-	font-family: "Avenir";
-}
-
-#videoTitle:before{
-  content: '\f10d';
-  font-family: "FontAwesome";
-  font-size: 80%;
-}
-
-#videoTitle:after{
-  content: '\f10e';
-  font-family: "FontAwesome";
-  font-size: 80%;
-}
-
-#videoSubtext{
-	text-align: center;
-	color: #FFF;
-}
-
-#videoDetails{
-	color: #BBBBBB;
-}
-
-#audio{
-  display: none;
 }
