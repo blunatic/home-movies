@@ -15,7 +15,7 @@ if(process.env.NODE_ENV === 'production'){
 } else{
   jamendoKey = config.get('jamendo-api-key');
 }
-console.log(process.env.NODE_ENV);
+
 var port = process.env.PORT || 8080;
 
 // tell node where to look for site resources
