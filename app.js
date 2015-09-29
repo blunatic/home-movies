@@ -5,12 +5,15 @@ var app = express();
 var request = require('request');
 var bodyParser = require('body-parser');
 var config = require('config');
-var jamendoKey = config.get('jamendo-api-key');
 var apicache = require('apicache').options({ debug: true }).middleware;
 var Jamendo = require('jamendo');
 
+var jamendoKey;
+
 if(process.env.NODE_ENV === 'production'){
   jamendoKey = process.env.JAMENDO_API_KEY;
+} else{
+  jamendoKey = config.get('jamendo-api-key');
 }
 console.log(process.env.NODE_ENV);
 var port = process.env.PORT || 8080;
