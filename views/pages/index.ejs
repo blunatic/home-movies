@@ -19,7 +19,7 @@
 						<label id="searchIcon" ng-show="!loading">
 							<span class="fa fa-search"></span>
 						</label>
-						<input type="text" ng-model="search" ng-change="change()" id="searchBox" class="form-control" placeholder="Search...">
+						<input type="text" ng-model="search" ng-change="change()" id="searchBox" class="form-control" placeholder="Search videos...">
 						</input>
 						<p id="noResults" ng-cloak ng-show="noResults"> No results found! Please try another search.</p>
 					</div>
@@ -51,6 +51,13 @@
 						<h4 id="videoCollection" ng-bind="videoCollection"></h4>
 						<p id="videoDescription" ng-bind="videoDescription"></p>
 					</div>
+				</div>
+				<div id="musicDetails" ng-cloak ng-show="songName">
+					<hr id="video-hr">
+					<h4 id="songName" ng-show="songName">Now Playing: "{{songName}}"</h4>
+					<h4 id="artistName" ng-show="artistName">Artist: {{artistName}}</h4>
+					<a ng-href="{{songLink}}"><span class="fa fa-music"></span></a>
+					<hr id="video-hr">
 				</div>
 			</div>
 		</div>

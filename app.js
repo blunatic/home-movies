@@ -58,7 +58,7 @@ router.get('/search/:movie', apicache('5 minutes'), function(req, res) {
 router.get('/music', function(req, res){
     jamendo.tracks({
         limit: '100',
-        tags: 'jazz+instrumental'
+        tags: 'soundscape+ambient'
     }, function(error, data){
         res.send(data);
     });

@@ -33,6 +33,14 @@ main {
 	padding-top: 3%;
 }
 
+h4{
+  font-family: "Avenir";
+}
+
+p{
+  font-size: 1em;
+}
+
 footer {
 	padding:50px;
 }
@@ -174,7 +182,7 @@ a{
   left: 5.5%;
   top: 26.5%;
   width: 70%;
-  height: 82%;
+  height: 81.5%;
 	background-image: url('../images/tv-off.png');
 }
 
@@ -299,30 +307,70 @@ a{
   padding-bottom: 20%;
 }
 
+#videoTitle{
+  font-family: "Futura";
+  font-size: 1.8em;
+}
+
 #videoTitle:before{
   content: '\f10d';
   font-family: "FontAwesome";
   font-size: 80%;
+  opacity: .4;
 }
 
 #videoTitle:after{
   content: '\f10e';
   font-family: "FontAwesome";
   font-size: 80%;
+  opacity: .4;
 }
 
 #videoSubtext{
   text-align: center;
   color: #FFF;
+  padding-bottom: 25px;
 }
 
 #videoDetails{
   color: #BBBBBB;
 }
 
+#videoCollection{
+  color: #BBBBBB;
+}
+
+#video-hr{
+  width: 40%;
+  height: 1px;
+  background-color:#FFF;
+  color:#FFF;
+  border: 0 none;
+  margin: 5px auto;
+  opacity: .3;
+}
+
+#musicDetails{
+  text-align: center;
+  font-style: italic;
+}
+
 #audio{
   display: none;
 }
+
+/* Mobile media query */
+
+/* Portrait */
+@media screen and (max-width: 768px) {
+    #videoTitle{
+      font-size: 1.625em;
+    }
+    h4{
+        font-size: 1.125em;
+    }
+}
+
 
 /* CSS Animation timelines for change-channel effect, TV on effect, and speaker wiggle effect */
 

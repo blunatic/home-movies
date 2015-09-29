@@ -19,13 +19,29 @@ angular.module('homeMovies').controller('MainController', function($scope, $http
 
     // get next movie on top knob/button click
     $scope.nextMovie = function() {
+        if($scope.search){
         currentMovie++;
         updateMovie();
+        }   
     };
 
     // allow user to select all text inside input
     $scope.select = function() {
         this.setSelectionRange(0, this.value.length);
+    };
+
+    // get next song on top knob/button click
+    $scope.getSong = function() {
+        // get random song from set of current songs each time
+        randomSong = Math.floor(Math.random() * 100) + 1;
+        if (!$scope.currentSongs) {
+            songService.getMusic().then(function(response) {
+                $scope.currentSongs = response;
+                updateSong();
+            });
+        } else {
+            updateSong();
+        }
     };
 
     // fetch movie from server (which grabs from Internet Archive)
@@ -49,6 +65,10 @@ angular.module('homeMovies').controller('MainController', function($scope, $http
 
     // display movie results and/or update movie and results if button is clicked
     function updateMovie() {
+        // cycle back through movies once end of results is found
+        if((currentMovie) == $scope.currentMovies.numFound){
+            currentMovie = 0;
+        }
         // display loading spinner
         $scope.loading = false;
 
@@ -59,7 +79,7 @@ angular.module('homeMovies').controller('MainController', function($scope, $http
         // set video title, clearing out any brackets in title
         var temp = $scope.currentMovies.docs[currentMovie].title;
         var title = temp.replace(/[\[\]']+/g, '');
-        $scope.videoTitle = " " + title + " ";
+        $scope.videoTitle = "  " + title + "  ";
 
         // set video date
         var date = new Date($scope.currentMovies.docs[currentMovie].date);
@@ -70,28 +90,20 @@ angular.module('homeMovies').controller('MainController', function($scope, $http
         // set video details (note: Internet Archive uses "downloads" field for number of views)
         $scope.videoDetails = year + " | Result: " + (currentMovie + 1) + " of " +
             $scope.currentMovies.numFound + " | Views: " + $scope.currentMovies.docs[currentMovie].downloads;
-        $scope.videoCollection = $scope.currentMovies.docs[currentMovie].collection[0] + " Collection";
+        var collection = $scope.currentMovies.docs[currentMovie].collection[0];
+        collection = collection.charAt(0).toUpperCase() + collection.substring(1);
+        collection = collection.replace(/_/g, ' ');
+        $scope.videoCollection = collection + " Collection";
         $scope.videoDescription = $scope.currentMovies.docs[currentMovie].description;
     }
 
-    // get next movie on top knob/button click
-    $scope.getSong = function() {
-        // get random song from set of current songs each time
-        randomSong = Math.floor(Math.random() * 100) + 1;
-        if (!$scope.currentSongs) {
-            songService.getMusic().then(function(response) {
-                $scope.currentSongs = response;
-                updateSong();
-            });
-        } else {
-            updateSong();
-        }
-    };
-
     function updateSong() {
-        var songName = $scope.currentSongs.results[randomSong].name;
+        console.log($scope.currentSongs);
+        var shortUrl = $scope.currentSongs.results[randomSong].shorturl;
         var trackUrl = $scope.currentSongs.results[randomSong].audio;
-
+        $scope.songName = $scope.currentSongs.results[randomSong].name;
+        $scope.artistName = $scope.currentSongs.results[randomSong].artist_name;
+        $scope.songLink = shortUrl;
         var musicPlayer = document.getElementById('audio');
         $('#fma-song').attr('src', trackUrl);
         musicPlayer.load();
