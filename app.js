@@ -9,6 +9,10 @@ var jamendoKey = config.get('jamendo-api-key');
 var apicache = require('apicache').options({ debug: true }).middleware;
 var Jamendo = require('jamendo');
 
+if(process.env.NODE_ENV === 'production'){
+  jamendoKey = process.env.JAMENDO_API_KEY;
+}
+console.log(process.env.NODE_ENV);
 var port = process.env.PORT || 8080;
 
 // tell node where to look for site resources
