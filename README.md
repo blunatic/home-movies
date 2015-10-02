@@ -1,6 +1,7 @@
 # home-movies
-Video player web app for Internet Archive's Home Movies Collection
+Video player web app for Internet Archive's Home Movies Collection. Designed to present the Home Movies collection in a more focused and interesting way alongside free music from Jamendo.
 
-Built using [Node](https://nodejs.org/en/), [Express](http://expressjs.com/), and the [Internet Archive API](https://archive.org/help/json.php).
+Built using [Node](https://nodejs.org/en/), [ExpressJS](http://expressjs.com/), [AngularJS](https://angularjs.org/
+) the [Internet Archive API](https://archive.org/help/json.php) and [Jamendo API](https://developer.jamendo.com/v3.0). The wonderful animation framework [GSAP](greensock.com/gsap) was also used to assist with some of the animations.
 
-(In progress...keep an eye out!)
+![Home-Movies](https://cloud.githubusercontent.com/assets/5156743/10253071/3d116336-68f0-11e5-9856-d03515edf0a8.png)
