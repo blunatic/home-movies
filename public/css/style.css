@@ -49,6 +49,14 @@ a{
 	color: #C45852;
 }
 
+a:hover{
+  color: #DB9F45;
+}
+
+a:active{
+  color: #DB9F45;
+}
+
 /* Modal (Header) */
 
 #myModal .modal-header{
