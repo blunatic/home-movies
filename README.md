@@ -1,4 +1,4 @@
-# home-movies
+# Home Movies
 Video player web app for Internet Archive's Home Movies Collection. Designed to present the Home Movies collection in a more focused and interesting way alongside free music from Jamendo.
 
 Built using [Node](https://nodejs.org/en/), [ExpressJS](http://expressjs.com/), [AngularJS](https://angularjs.org/
