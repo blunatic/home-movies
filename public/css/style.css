@@ -34,7 +34,7 @@ main {
 }
 
 h4{
-  font-family: "Avenir";
+  font-family: "Avenir", "Lato", "Arial";
 }
 
 p{
@@ -69,25 +69,14 @@ a:active{
 
 #myModal .modal-title{
 	text-align: center;
-	font-family: "Futura";
 }
-
-#myModal .modal-subtitle{
-	font-family: "Futura";
-}
-
 
 #myModal .modal-body{
 	padding: 15px;
 }
 
-#myModal .modal-title{
-	text-align: center;
-	font-family: "Futura";
-}
-
 #myModal .modal-subtitle{
-	font-family: "Futura";
+	font-family: "Futura", "Century Gothic";
 }
 
 .modal-content{
@@ -111,7 +100,7 @@ a:active{
 	text-align: center;
 	padding-bottom: 5%;
 	font-size: 1.5em;
-	font-family: "Futura";
+	font-family: "Futura", "Century Gothic";
 	text-transform: uppercase;
 	color: #FFF;
 }
@@ -122,7 +111,6 @@ a:active{
 	position: relative;
   font-size: 24px;
   display: block;
-  font-family: "Avenir";
 }
 
 .search label{
@@ -326,7 +314,7 @@ a:active{
 }
 
 #videoTitle{
-  font-family: "Futura";
+  font-family: "Futura", "Century Gothic";
   font-size: 1.8em;
 }
 
