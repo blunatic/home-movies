@@ -1,6 +1,6 @@
 angular.module('homeMovies', []);
 
-// factory for consuming web services and returnin data to controller
+// factory for consuming web services and returning data to controller
 angular.module('homeMovies').factory('mainService', function($http) {
     return {
         getMovies: function(query) {
